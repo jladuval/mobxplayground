@@ -11,26 +11,20 @@ const defaultState = {
 }
 
 const Example = ({ localState, changeLocalState, applicationState }) => {
-  const updateFooLocally = () => changeLocalState({ blam: 'fandas' })
-  const thisMethodShouldNotWork = () => { applicationState.exampleStore.person.foo = 'osadijfoasijf' }
+  const updateFooLocally = (e) => changeLocalState({ foo: e.target.value })
+  const thisMethodShouldNotWork = (e) => { applicationState.exampleStore.person.importantThing = e.target.value }
+  //changeLocalState({ foo: applicationState.exampleStore.person.importantThing })
   const updateFooInAppState = () => { updateFoo('newFooValue') }
   return (
     <div styleName='main'>
       <div styleName='container'>
         <pre>{JSON.stringify(localState, null, 3)}</pre>
         <pre>{JSON.stringify(applicationState, null, 3)}</pre>
+        <input type="text" value={applicationState.exampleStore.person.importantThing} onChange={thisMethodShouldNotWork} />
+        <input type="text" value={localState.foo} onChange={updateFooLocally}/>
         <button
-          label={'update local state'}
-          onClick={updateFooLocally}
-        />
-        <button
-          label={'this should do nothing'}
-          onClick={thisMethodShouldNotWork}
-        />
-        <button
-          label={'Update application state'}
           onClick={updateFooInAppState}
-        />
+        >Update application state</button>
       </div>
     </div>
   )
