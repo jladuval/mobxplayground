@@ -2,7 +2,6 @@ import React from 'react'
 import { compose } from 'ramda'
 import { observer } from 'mobx-react'
 import injectLocalState from '../componentWrappers/injectLocalState'
-import Paper from 'material-ui/Paper'
 import updateFoo from '../actions/updateFoo'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -12,28 +11,27 @@ const defaultState = {
 }
 
 const Example = ({ localState, changeLocalState, applicationState }) => {
-  console.log('sodijfosijsadf')
   const updateFooLocally = () => changeLocalState({ blam: 'fandas' })
   const thisMethodShouldNotWork = () => { applicationState.exampleStore.person.foo = 'osadijfoasijf' }
   const updateFooInAppState = () => { updateFoo('newFooValue') }
   return (
     <div styleName='main'>
-      <Paper styleName='container'>
+      <div styleName='container'>
         <pre>{JSON.stringify(localState, null, 3)}</pre>
         <pre>{JSON.stringify(applicationState, null, 3)}</pre>
-        <RaisedButton
+        <button
           label={'update local state'}
-          onTouchTap={updateFooLocally}
+          onClick={updateFooLocally}
         />
-        <RaisedButton
+        <button
           label={'this should do nothing'}
-          onTouchTap={thisMethodShouldNotWork}
+          onClick={thisMethodShouldNotWork}
         />
-        <RaisedButton
+        <button
           label={'Update application state'}
-          onTouchTap={updateFooInAppState}
+          onClick={updateFooInAppState}
         />
-      </Paper>
+      </div>
     </div>
   )
 }

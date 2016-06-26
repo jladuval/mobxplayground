@@ -11,8 +11,7 @@ class AppComponent extends React.Component {
   render() {
     return (
       <div className="index">
-        <Example foo="bar">
-        </Example>
+        <Example />
       </div>
     );
   }
